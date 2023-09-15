@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    h2{
+color: white;
+font-size: 20px;
+border: 2px solid red;
+
+padding: 25px;
+    }
+</style>
+<body>
+    <h2 id="password"></h2>
+    <script>
+        const pass_el =  document.querySelector('#password');
+        const length = 12;
+        const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789!@$%^&*()";
+
+        function GeneratorPassword (){
+            let pass = "";
+            for(var i = 0 ; i <=length; i++){
+                let rand = Math.floor(
+                    Math.random() * chars.length
+                );
+                pass += chars.substring(rand, rand+1);
+            
+            }
+            pass_el.innerHTML = pass;
+        }
+        GeneratorPassword();
+    </script>
+</body>
+</html>

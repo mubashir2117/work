@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: black;
+
+    }
+
+    .quotebox {
+        background-color: whitesmoke;
+        padding: 15px;
+        margin-top: 3%;
+        margin-left: 30%;
+        margin-right: 30%;
+        border-radius: 30px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    .quotebox h2 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    .quotebox blockquote {
+        font-size: 26px;
+        text-align: center;
+
+    }
+
+    .quotebox span {
+
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+
+    }
+
+    .quotebox p {
+        font-size: 20px;
+        display: flex;
+        justify-content: center;
+    }
+
+    button {
+        border: none;
+        background-color: dodgerblue;
+        color: white;
+        margin-left:35%;
+        padding: 15px;
+        border-radius: 30px;
+        font-size: 18px;
+        margin-top: 15px;
+
+
+    }
+
+    button:hover {
+        background-color: white;
+        color: dodgerblue;
+    }
+</style>
+
+<body>
+    <div class="quotebox">
+        <h2>Quote of The day</h2>
+        <blockquote id="quote">Loading..</blockquote>
+        <span id="author">Loading..</span>
+        <hr>
+        <p id="tags">Loading..</p>
+        <button onclick="getquote(api_url)">New Quote</button>
+    </div>
+
+
+
+    <script>
+        const quote = document.getElementById("quote");
+        const author = document.getElementById("author");
+        const api_url = "http://api.quotable.io/random";
+
+        async function getquote(url) {
+            const response = await fetch(url);
+            var data = await response.json();
+
+            quote.innerHTML = data.content;
+            author.innerHTML = data.author;
+            tags.innerHTML = data.tags;
+
+
+            console.log(data)
+        }
+
+        getquote(api_url);
+    </script>
+</body>
+
+</html>
