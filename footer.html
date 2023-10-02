@@ -1,0 +1,193 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Social Buttons</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <style>
+        
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display&display=swap');
+
+:root {
+    --background: #2C2C2C;
+	--active: #00C896;	
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+    font-family: 'Red Hat Display', sans-serif;
+	background-color: var(--background);
+	height: 100vh;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socials-wrapper {
+	position: relative;
+}
+
+.socials-menu {
+	opacity: 0;	
+	transition: opacity 0.5s;
+}
+
+.active > .socials-menu {
+	opacity: 1;	
+}
+
+.share-button {
+	position: absolute;
+	border: none;
+	cursor: pointer;
+	z-index: 2;
+	transition: all 0.4s ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	outline: 2px solid white;
+	outline-offset: 3px;
+}
+
+.share-button img {
+	height: 32px;
+	width: 32px;
+}
+
+.active .share-button, .share-button:hover {
+	background-color: var(--active);
+	transform: scale(1.03);
+}
+
+.social {
+	position: absolute;
+	list-style: none;
+	transition: all 0.5s ease-in-out;
+	display: grid;
+	cursor: pointer;
+	place-items: center;
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	outline: 2px solid white;
+	outline-offset: 3px;
+}
+
+.social img {
+	height: 32px;
+	width: 32px;
+	transition: all 0.3s;
+}
+
+.social a {
+	display: grid;
+	cursor: pointer;
+	place-items: center;
+}
+
+.social:hover img {
+    transform: scale(1.10);
+}
+
+.active .social:nth-child(1) {
+	transform: translateX(-82px);
+}
+
+
+.active .social:nth-child(1):hover {
+	background: radial-gradient(
+        circle at 30% 107%, #fdf497 0%, 
+        #fdf497 5%, #fd5949 45%,
+        #d6249f 60%,#285AEB 90%
+    ); 
+}
+
+.active .social:nth-child(2) {
+	transform: translateY(-82px);
+}
+
+.active .social:nth-child(2):hover {
+	background-color: #1D9BF0;
+}
+
+.active .social:nth-child(3) {
+	transform: translateX(82px);
+}
+
+.active .social:nth-child(3):hover {
+	background: radial-gradient(
+        circle at 30% 107%, #fdf497 0%, 
+        #fdf497 5%, #fd5949 45%,
+        #d6249f 60%,#285AEB 90%
+    ); 
+}
+
+.active .social:nth-child(4) {
+	transform: translateY(82px);
+}
+
+.active .social:nth-child(4):hover {
+	background-color: #e52d27;
+}
+
+    </style>
+    <body>
+        <div class="socials-wrapper">
+			<div class="share-button">
+                <img src="logo.svg" alt="Share On Socials" />
+			</div>
+			<menu class="socials-menu">
+				<li class="social">
+					<a href="#" title="Instagram">
+						<img src="instagram.jpg" alt="Instagram" />
+					</a>
+				</li>
+                <li class="social">
+					<a href="#" title="Twitter">
+						<img src="tweeter.jpg" alt="Twitter" />
+					</a>
+				</li>
+                <li class="social" title="Threads">
+					<a href="#">
+						<img src="thread.jpg" alt="Threads" />
+					</a>
+				</li>
+				<li class="social">
+					<a href="#" title="Youtube">
+						<img src="yuotube.png" alt="Youtube" />
+					</a>
+				</li>
+			</menu>
+		</div>
+    </body>
+	<script>
+        
+const shareButton = document.querySelector('.share-button');
+const toggleSocials = () => {
+    const socialsWrapper = document.querySelector('.socials-wrapper')
+    const shareButtonImage = shareButton.querySelector('img')
+    
+    socialsWrapper.classList.toggle('active')
+
+    if (shareButtonImage.src.includes('share')) {
+        shareButtonImage.src = 'assets/close.svg';
+    } else {
+        shareButtonImage.src = 'assets/share.svg';
+    }
+}
+
+shareButton.addEventListener('click', toggleSocials);
+
+    </script>
+</html>

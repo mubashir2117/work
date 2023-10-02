@@ -12,55 +12,215 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>doc</title>
+    <style>
+       *
+{
+    margin: 0;
+    padding: 0;
+ box-sizing: border-box;
+}
+
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    font-family: 'Roboto', sans-serif;
+    background-color: black;
+ 
+}
+
+.conatiner
+{
+    background: linear-gradient(0deg, #00fe3fc6,#000000);
+
+    width: 500px;
+   height: ;
+    border-radius: 20px;
+}
+
+.searchbox
+{
+    display: flex;
+    margin: 30px 60px;
+   gap: 20px;
+    align-items: center;
+}
+.searchbox input
+{
+    border: none;
+    outline: none;
+    width: 450px !important;
+    height: 40px;
+    border-radius: 15px;
+    padding-left: 10px;
+    font-size: 18px;
+
+
+}
+.searchbox i 
+{
+    background-color: white;
+    padding: 8px 8px;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.body
+{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 40px;
+}
+
+
+.body h2 
+{
+    font-size: 35px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.body h3 
+{
+    font-size: 22px;
+    color: white;
+    font-weight: bold;
+}
+
+.detail
+{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+padding-bottom: 0px;
+}
+
+
+.col{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.col i 
+{
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    
+}
+
+
+.col h5 
+{
+    font-size: 18px;
+    color: white;
+   
+}
+.col p 
+{
+    font-size: 17px;
+    color: white;
+}
+
+
+    </style>
 </head>
 
 <body>
 
-    <div class="container">
+    <div class="conatiner">
         <div class="searchbox">
-            <input type="text" placeholder="Enter your CityName" id="search">
-            <i class="fa-solid fa-magnifying-glass" id="searchicon"></i>
+             <input type="text" placeholder="Enter city Name" id="searchinput">
+            <i class="fa-solid fa-magnifying-glass" id="serchbox"></i>
         </div>
-<div class="body">
-    <h2 id="tempe">22 </h2>
-    <h3 id="city">london</h3>
 
-</div>
 
+        <div class="body" id="body_data">
+               <h2 id="temp">22°C
+            </h2>
+            <h3 id="city">New York</h3>
+                
+        </div>
+
+
+        <div class="detail" id="detail">
+            <div class="col">
+                <i class="fa-solid fa-droplet"></i>
+                <div>
+                <h5 id="humidity">50%</h5>
+                <p >humidity</p>
+            </div>
+            </div>
+            <div class="col">
+               
+                <i class="fa-solid fa-wind"></i>
+                  <div>
+                <h5 id="windspeed">15  km/h</h5>
+                <p>wind speed</p>
+            </div>
+            
+            </div>
+            
+            <div class="col">
+               
+                <i class="fa-solid fa-cloud"></i>
+                  <div>
+                <h5 id="rain"></h5>
+                <p>Light Rain</p>
+            </div>
     </div>
+
+    
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
 
 
     <script>
-        var cityName = document.getElementById('city');
-        var temp = document.getElementById('tempe');
-        var Searchicon = document.getElementById('searchicon');
-        var search = document.getElementById('search');
+        var temp = document.getElementById('temp');
+        var cityName = document.getElementById('city')
+        var humidity = document.getElementById('humidity')
+        var windspeed = document.getElementById('windspeed')
+        var searchinput = document.getElementById('searchinput');
+        var serchbox = document.getElementById('serchbox')
+        var rains = document.getElementById('rain');
 
 
+        async function checkWeather(city) {
+            let Upi_key = 'f27b269d54e4fa1e72993364a80fa8bd'
+            let repsponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${Upi_key}&units=metric`);
+            let data = await repsponse.json();
 
-        async function checkWeath(city) {
 
-            let api_key = 'b6ba3d292588bc78d3754d147dff2ad7'
-            let response = await fetch( `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`)
-    
-            let data = await response.json()
 
             console.log(data)
+            temp.innerHTML = Math.floor(data.main.temp) + '°C';
             cityName.innerHTML = data.name;
-            temp.innerHTML = Math.floor(data.main.temp) + "°C"
+            humidity.innerHTML = data.main.humidity + "%";
+            windspeed.innerHTML = data.wind.speed + 'km/h';
+          rains.innerHTML = data.weather[0].description;
 
 
         }
 
-        checkWeath()
- Searchicon.addEventListener('click', ()=>
- {
-    checkWeath(search.value)
- })
+        serchbox.addEventListener('click',()=>
+      {
+          let cityIn = searchinput.value;
+          checkWeather(cityIn);
+         
+      })
 
     </script>
 

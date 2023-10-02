@@ -1,0 +1,253 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Dropdown Menu 03</title>
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+          href="https://fonts.googleapis.com/css2?family=Poppins&display=swap"
+          rel="stylesheet"
+      >
+      <link rel="stylesheet" href="style.css">
+    </head>
+    <style>
+        :root {
+  --primary-item: #3B3E40;
+  --background-item: #EFEFEF;
+  --gray: #D5D4D5;
+  --background: #2C2C2C;
+  --item-non-hover: #92969A
+}
+
+html {
+	font-size: 16px;
+	font-family: "Poppins", serif;
+}
+
+body {
+	background: var(--background);
+	height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.accordion-container {
+  min-width: 330px;
+  padding: 16px;
+  border-radius: 16px;
+  overflow: hidden;
+  background-color: #FCFCFC;
+}
+
+.main-item {
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+  transition: all ease-in-out 0.25s;
+  color: var(--item-non-hover);
+}
+
+
+.main-item:hover {
+  background-color: var(--background-item);
+  color: var(--primary-item);
+}
+
+.main-item svg {
+  stroke: var(--item-non-hover);
+  transition: all ease-in-out 0.25s;
+}
+
+.main-item:hover svg {
+  stroke: var(--primary-item);
+}
+
+.main-item--open {
+  border-radius: 8px;
+  background-color: var(--background-item);
+  transition: all 200ms;
+  color: var(--primary-item);
+}
+
+.main-item--open:hover {
+  color: var(--primary-item);
+  border-radius: 8px;
+  background-color: var(--background-item);
+}
+
+.main-item--open svg {
+  stroke: var(--primary-item);
+}
+
+.accordion-container > ul {
+  max-height: 0px;
+  list-style-type: none;
+  margin: 0px;
+  padding-left: 14px;
+  opacity: 0;
+  font-size: smaller;
+  visibility: hidden;
+  transition: all ease-in-out 0.2s;
+}
+
+.main-item--open + ul {
+  visibility: visible;
+  max-height: 400px;
+  padding-left: 22px;
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.accordion-container > ul > li {
+  height: 48px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.accordion-container > ul > li > a {
+  color: var(--item-non-hover);
+  padding: 16px 8px;
+  height: 38px;
+  line-height: 38px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.accordion-container > ul > li:hover {
+  color: var(--primary-item);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.accordion-container > ul > li:hover > a {
+  color: var(--primary-item);
+  background-color: var(--background-item);
+  width: 100%;
+}
+
+.expand-icon {
+  width: 24px;
+  height: 24px;
+  margin-left: auto;
+}
+
+.main-item--open > .expand-icon {
+  transform: rotate(-90deg);
+}
+
+.line-vertical {
+  display: block;
+  background-color: var(--background-item);
+  width: 2px;
+  height: 48px;
+}
+
+.accordion-container > ul > 
+li:last-child > .line-vertical {
+  height: 25px;
+  align-self: flex-start;
+}
+
+.line-horizontal {
+  display: block;
+  background-color: var(--background-item);
+  height: 2px;
+  min-width: 12px;
+}
+
+    </style>
+    <body>
+      <nav class="accordion-container">
+        <div class="main-item">
+          <svg
+              xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" 
+              fill="none" stroke-linecap="round" stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M9 14c0 1.657 2.686 3 6 3s6 -1.343 6 -3s-2.686 -3 -6 -3s-6 1.343 -6 3z"></path>
+            <path d="M9 14v4c0 1.656 2.686 3 6 3s6 -1.344 6 -3v-4"></path>
+            <path d="M3 6c0 1.072 1.144 2.062 3 2.598s4.144 .536 6 0c1.856 -.536 3 -1.526 3 -2.598c0 -1.072 -1.144 -2.062 -3 -2.598s-4.144 -.536 -6 0c-1.856 .536 -3 1.526 -3 2.598z"></path>
+            <path d="M3 6v10c0 .888 .772 1.45 2 2"></path>
+            <path d="M3 11c0 .888 .772 1.45 2 2"></path>
+          </svg>
+          Payments
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="expand-icon"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M9 6l6 6l-6 6" />
+          </svg>
+        </div>
+        <ul>
+            <li>
+              <div class="line-vertical"></div>
+              <div class="line-horizontal"></div>
+              <a href="#income" title="Income">
+                Income
+              </a>
+            </li>
+            <li>
+              <div class="line-vertical"></div>
+              <div class="line-horizontal"></div>
+              <a href="#expenses" title="Expense">
+                Expenses
+              </a>
+            </li>
+            <li>
+              <div class="line-vertical"></div>
+              <div class="line-horizontal"></div>
+              <a href="#statements" title="Statements">
+                Statements
+              </a>
+            </li>
+            <li>
+              <div class="line-vertical"></div>
+              <div class="line-horizontal"></div>
+              <a href="#payouts" title="Payouts">
+                Payouts
+              </a>
+            </li>
+        </ul>
+      </nav>
+      <script>
+        const mainItems = document.querySelectorAll(
+  '.main-item'
+);
+
+mainItems.forEach((mainItem) => {
+  mainItem.addEventListener('click', () => {
+    mainItem.classList.toggle(
+      'main-item--open'
+    );
+  })
+});
+
+      </script>
+    </body>
+</html>
