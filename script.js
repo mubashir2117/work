@@ -1,30 +1,60 @@
-debugger;
-const inputbox = document.querySelector('.input_box');
-const searchbtn = document.getElementById('searchBtn');
-const temperature = document.querySelector('.temperature');
-const description = document.querySelector('.description');
-const humidty = document.getElementById('humidty');
-const windspeed = document.getElementById('windspeed');
+var correctGuess = 0;
+var guessesTaken = 0;
+var maxGuesses = 7;
+var gameDone = 0;
 
+var newGame = function() { 
+  var lbl = document.getElementById('inputLabel');
+  lbl.innerHTML = " ";
+  guessesTaken = 0;
+  correctGuess = Math.floor((Math.random() * 100)+1);
+};
 
-async function checkWeather(city) {
-    const api_key = "b6ba3d292588bc78d3754d147dff2ad7";
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}`;
+newGame();
 
-    const weather_data = await fetch(`${url}`).then(response =>
-        response.json());
+var btnReset = document.getElementById('btnReset');
+btnReset.onclick = newGame;
 
-    temperature.innerHTML = `${weather_data.main.temp}°C`;
-    description.innerHTML = `${weather_data.weather[0].description}`;
-    humidty.innerHTML = `${weather_data.main.humidty}`;
-    windspeed.innerHTML = `${weather_data.wind.speed}km/h`;
-    // console.log(weather_data);
-}
+var response = function(txtGuess) {
+  var answer;
+  
+  while (guessesTaken < maxGuesses && gameDone == 0) {
+    if (txtGuess == correctGuess) {
+      answer = "Correct! ";
+    } else if (txtGuess < correctGuess && txtGuess > 0) {
+      answer = "Higher, ";
+    } else if (txtGuess > correctGuess && txtGuess < 101) {
+      answer = "Lower, ";
+    } else {
+      answer = "Enter a number, ";
+      return answer; /*exit loop to prevent increasing guessesTaken*/
+    }
+    
+    guessesTaken += 1;
+    return answer;
+  }
+  
+  return "New game?";
+};
 
-
-searchbtn.addEventListener('click', ()=> {
-    checkWeather(inputbox.value);
-});
-
-
-
+var btnSubmit = document.getElementById('btnSubmit');
+btnSubmit.onclick = function(e) {
+  var txtGuess = document.getElementById('guess').value;
+  var answer = response(txtGuess);
+  var remainingMessage = (maxGuesses - guessesTaken).toString() + " guess(es) remain"; 
+  var lbl = document.getElementById('inputLabel');
+  if (gameDone == 0) {
+    if (answer == "Correct! ") {
+      lbl.innerHTML += answer + "<p> Play again </p>";
+      gameDone = 1;
+    } else if (guessesTaken == maxGuesses) {
+      lbl.innerHTML += "<p> You lost. New game? </p>";
+      gameDone = 1;
+    } else {
+      lbl.innerHTML += "<span id='response'>" + txtGuess + "</span>" + answer + remainingMessage + "<br />";
+    }
+  }
+  var txtGuess = document.getElementById('guess');
+  txtGuess.value = null;
+  return false;
+};
